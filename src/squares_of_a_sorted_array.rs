@@ -9,21 +9,21 @@ pub fn sorted_squares(nums: Vec<i32>) -> Vec<i32> {
 	let mut list = vec![0; nums.len()];
 	let mut left = 0;
 	let mut right = (nums.len() - 1) as i32;
-	let mut position = nums.len() - 1;
+	let mut index = nums.len() - 1;
 
 	while left <= right {
 		let a = nums[left as usize];
 		let b = nums[right as usize];
 
 		if a.abs() < b.abs() {
-			list[position] = b.pow(2);
+			list[index] = b.pow(2);
 			right -= 1;
 		} else {
-			list[position] = a.pow(2);
+			list[index] = a.pow(2);
 			left += 1;
 		}
 
-		position = if position != 0 { position - 1 } else { 0 }
+		index = if index != 0 { index - 1 } else { 0 }
 	}
 
 	list
