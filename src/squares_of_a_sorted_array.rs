@@ -1,4 +1,3 @@
-#[allow(dead_code)]
 /**
  * [977] Squares of a Sorted Array
  *
