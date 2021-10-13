@@ -1,3 +1,4 @@
+#[allow(dead_code)]
 /**
  * [704] Binary Search
  *
