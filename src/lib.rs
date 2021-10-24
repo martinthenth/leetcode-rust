@@ -9,3 +9,4 @@ mod move_zeroes;
 mod two_sum_ii_input_array_is_sorted;
 mod reverse_string;
 mod reverse_words_in_a_string_iii;
+mod matrix_block_sum;
