@@ -3,6 +3,7 @@
 mod binary_search;
 mod build_array_from_permutation;
 mod concatenation_of_array;
+mod finding_the_users_active_minutes;
 mod first_bad_version;
 mod matrix_block_sum;
 mod move_zeroes;
