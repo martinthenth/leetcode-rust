@@ -2,6 +2,7 @@
 
 mod binary_search;
 mod build_array_from_permutation;
+mod concatenation_of_array;
 mod first_bad_version;
 mod matrix_block_sum;
 mod move_zeroes;
