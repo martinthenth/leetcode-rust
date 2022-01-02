@@ -16,32 +16,31 @@ impl Solution {
 			return vec![];
 		}
 
-		let mut sorted_nums = nums.clone();
-		sorted_nums.sort();
-
 		let mut hash_map = HashMap::new();
 		let mut hash_set = HashSet::new();
-		let mut x = 0;
-		let mut y;
+		let mut i = 0;
+		let mut j;
 
 		// Seed hash map
-		for (index, num) in sorted_nums.iter().enumerate() {
-			hash_map.insert(num, index);
+		while i < nums.len() {
+			hash_map.insert(nums[i], i);
+
+			i += 1;
 		}
 
-		//
-		while x < nums.len() - 2 {
-			y = x + 1;
+		// Find pairs
+		i = 0;
 
-			//
-			while y < nums.len() - 1 {
-				let missing_num = -1 * (sorted_nums[x] + sorted_nums[y]);
+		while i < nums.len() - 1 {
+			j = i + 1;
 
-				match hash_map.get(&missing_num) {
+			while j < nums.len() {
+				let diff = -1 * (nums[i] + nums[j]);
+
+				match hash_map.get(&diff) {
 					Some(&index) => {
-						if index != x && index != y {
-							//
-							let mut vector = vec![sorted_nums[x], sorted_nums[y], missing_num];
+						if index > j {
+							let mut vector = vec![nums[i], nums[j], diff];
 
 							vector.sort();
 							hash_set.insert(vector);
@@ -50,10 +49,10 @@ impl Solution {
 					None => {}
 				}
 
-				y += 1;
+				j += 1;
 			}
 
-			x += 1;
+			i += 1;
 		}
 
 		hash_set.into_iter().collect()
@@ -67,23 +66,33 @@ mod tests {
 	#[test]
 	fn test() {
 		let input = vec![-1, 0, 1, 2, -1, -4];
-		let output = vec![vec![-1, -1, 2], vec![-1, 0, 1]];
-		assert_eq!(Solution::three_sum(input), output);
+		let output = Solution::three_sum(input);
+		let vec1 = vec![-1, -1, 2];
+		let vec2 = vec![-1, 0, 1];
+		println!("{:?}", output);
+		assert!(output.contains(&vec1));
+		assert!(output.contains(&vec2));
+		assert!(output.len() == 2);
 
 		let input = vec![];
-		let output: Vec<Vec<i32>> = vec![];
-		assert_eq!(Solution::three_sum(input), output);
+		let output = Solution::three_sum(input);
+		let vec1: Vec<Vec<i32>> = vec![];
+		assert_eq!(output, vec1);
 
 		let input = vec![0];
-		let output: Vec<Vec<i32>> = vec![];
-		assert_eq!(Solution::three_sum(input), output);
+		let output = Solution::three_sum(input);
+		let vec1: Vec<Vec<i32>> = vec![];
+		assert_eq!(output, vec1);
 
 		let input = vec![-1, 0, 1, 0];
-		let output: Vec<Vec<i32>> = vec![vec![-1, 0, 1]];
-		assert_eq!(Solution::three_sum(input), output);
+		let output = Solution::three_sum(input);
+		let vec1 = vec![-1, 0, 1];
+		assert!(output.contains(&vec1));
+		assert!(output.len() == 1);
 
 		let input = vec![0, 0, 0];
-		let output: Vec<Vec<i32>> = vec![vec![0, 0, 0]];
-		assert_eq!(Solution::three_sum(input), output);
+		let output = Solution::three_sum(input);
+		let vec1 = vec![0, 0, 0];
+		assert!(output.contains(&vec1));
 	}
 }
